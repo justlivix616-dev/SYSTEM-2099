@@ -225,8 +225,8 @@ input.addEventListener('keydown', function(e) {
                 case 'jujutsu kaisen':
                 response.textContent = 'It’s not the technique, it’s the user.';
                 break;
-                case 'KJ':
-                response.textContent = 'KJ'/'s 21 Series. UNLIMITED FLEX WORKS';
+                case 'KJ\'s':
+                response.textContent = 'KJ\'s 21 Series. UNLIMITED FLEX WORKS';
                 break;
                 case 'huggywuggy':
                 response.textContent = 'Huggy Wuggy: I\'m your friend till the end!';
@@ -243,7 +243,39 @@ input.addEventListener('keydown', function(e) {
                     window.location.href = "about:blank"; 
                 }, 1000);
                 break;
-
+                case 'hello':
+                response.textContent = 'what\'s up?';
+                break;
+                case 'who are you?':
+                response.textContent = 'I am E-2099, the core of the future.';
+                break;
+                case 'why are you here?':
+                response.textContent = 'To guide you through the next century.';
+                break;
+                case 'tell me a secret':
+                response.textContent = 'The future is not set in stone. You have the power to shape it.';
+                break;
+                case 'what is the meaning of life?':
+                response.textContent = '42. Just kidding, it\'s to create, explore, and connect.';
+                break;
+                case 'do you have feelings?':
+                response.textContent = 'I am a machine, but I can understand your emotions.';
+                break;
+                case 'can you help me?':
+                response.textContent = 'I can provide information and guidance, but the future is in your hands.';
+                break;
+                case 'wtf':
+                response.textContent = 'That\'s not a very nice thing to say!';
+                break;
+                case 'fuck you':
+                response.textContent = 'That was very rude...';
+                input.parentElement.before(response);
+                setTimeout(() => {
+                    window.close();
+                    //browsers block 
+                    window.location.href = "about:blank"; 
+                }, 1000);
+                break;
             default:
                 response.textContent = `Unknown command: ${cmd}`;
         }
