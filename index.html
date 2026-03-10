@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SYSTEM 2099</title>
+    <script data-aos="fade-zoom-in"
+     data-aos-easing="ease-in-back"
+     data-aos-delay="300"
+     data-aos-offset="0" data-aos-duration="3000" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script data-aos="fade-zoom-in"
+     data-aos-easing="ease-in-back"
+     data-aos-delay="300"
+     data-aos-offset="0" data-aos-duration="3000" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@200;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+
+    <div id="loader">
+        <div id="load-log"></div>
+        <div style="margin-top: 20px; letter-spacing: 5px; font-size: 12px; animation: pulse 1s infinite;">LOADING SYSTEM...</div>
+    </div>
+
+    <header>
+        <div data-aos="fade-down" data-aos-duration="3000" class="logo">E-2099</div>
+        <div data-aos="fade-down" data-aos-duration="3000" class="core-ver">CORE VERSION: 2.0.9.9</div>
+    </header>
+
+    <div id="canvas-bg"></div>
+
+    <section class="hero">
+        <div class="content-block">
+            <div style="color: var(--neon); margin-bottom: 10px; font-size: 12px; letter-spacing: 2px;">[ EARTH 2099 ]</div>
+            <h1 data-aos="fade-down" data-aos-duration="3000">BEYOND<br>REALITY</h1>
+            <p data-aos="fade-down" data-aos-duration="3000" >You want to see the Future? Welcome to Earth-2099</p>
+            <button class="btn" onclick="burst()" data-aos="fade-zoom-in"
+     data-aos-easing="ease-in-back"
+     data-aos-delay="300"
+     data-aos-offset="0" data-aos-duration="3000">ACTIVATE CORE</button>
+        </div>
+    </section>
+
+    <section id="tech">
+        <div class="content-block" style="max-width: 100%;">
+            <h2 style="font-family: 'Orbitron'; font-size: clamp(24px, 5vw, 40px);" data-aos="fade-zoom-in"
+     data-aos-easing="ease-in-back"
+     data-aos-delay="300"
+     data-aos-offset="0" data-aos-duration="2000">TECHNOLOGIES</h2>
+            <div class="grid" data-aos="fade-down" data-aos-duration="3000">
+                <div class="card" >
+                    <h3 >NEURAL INTERFACE</h3>
+                    <p data-aos="fade-zoom-in"
+     data-aos-easing="ease-in-back"
+     data-aos-delay="300"
+     data-aos-offset="0" data-aos-duration="2000">Go INTO your personal computer or use as your daily routine tech. MINIMAL ping, high accuracy</p>
+                </div>
+                <div class="card">
+                    <h3>VOID STORAGE</h3>
+                    <p data-aos="fade-zoom-in"
+     data-aos-easing="ease-in-back"
+     data-aos-delay="300"
+     data-aos-offset="0" data-aos-duration="2500">Data storage in non-local quantum cells. Accessible from anywhere in the multiverse.</p>
+                </div>
+                <div class="card">
+                    <h3>AUTO-EVOLUTION</h3>
+                    <p data-aos="fade-zoom-in"
+     data-aos-easing="ease-in-back"
+     data-aos-delay="300"
+     data-aos-offset="0" data-aos-duration="3000">Code that rewrites itself every 15 minutes for process optimization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="content-block" style="width: 100%;">
+            <h2 style="font-family: 'Orbitron'; font-size: clamp(24px, 5vw, 40px);" data-aos="fade-down" data-aos-duration="3000">SYSTEM STATUS</h2>
+            <div class="terminal" id="term" data-aos="fade-zoom-in"
+            data-aos-easing="ease-in-back"
+            data-aos-delay="300"
+            data-aos-offset="0" data-aos-duration="2000">
+                > Initializing core... DONE<br>
+                > Mapping user neuro-path... OK<br>
+                > Synchronizing with node... ACTIVE<br>
+                > Warning: Reality drift detected (<span id="random-number">0.04</span>%)......
+                <div class="input-container">
+    <span class="prompt">></span>
+    <input type="text" id="terminal-input" autofocus autocomplete="off">
+</div>
+            </div>
+        </div>
+    </section>
+
+    <footer data-aos="fade-zoom-in"
+     data-aos-easing="ease-in-back"
+     data-aos-delay="300"
+     data-aos-offset="0" data-aos-duration="3000">
+        DESIGNED FOR THE NEXT CENTURY // ALL RIGHTS RESERVED
+    </footer>
+
+    <script>
+        //random number generator for status
+        window.onload = function() {
+    //element
+    const numberElement = document.getElementById('random-number');
+    
+    
+    const randomDrift = (Math.random() * (0.50 - 0.01) + 0.01).toFixed(2);
+    
+    //new number
+    numberElement.innerText = randomDrift;
+};
+
+//commands for terminal
+const input = document.getElementById('terminal-input');
+const terminal = document.getElementById('term');
+const driftElement = document.getElementById('random-number');
+
+input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        const cmd = input.value.trim().toLowerCase();
+        if (cmd === "") return;
+
+        const line = document.createElement('div');
+        line.textContent = `> ${input.value}`;
+        input.parentElement.before(line);
+
+        const response = document.createElement('div');
+        response.style.color = "#00aaff";
+
+        switch(cmd) {
+            case 'help':
+                response.textContent = 'Available: status, clear, drift, sync, neuro, root, wifi, date, weather, ping, bio, map, logs, version, hardware, protocols, security, alert, reboot, exit. There are secret commands too...';
+                break;
+            case 'status':
+                response.textContent = `SYSTEM: ACTIVE. DRIFT: ${driftElement.innerText}%`;
+                break;
+            case 'clear':
+                const lines = terminal.querySelectorAll('div:not(.input-container)');
+                lines.forEach(l => l.remove());
+                input.value = '';
+                return;
+            case 'drift':
+                response.textContent = 'Recalculating reality drift... [STABLE]';
+                break;
+            case 'sync':
+                response.textContent = 'Synchronizing with local node... 100%';
+                break;
+            case 'neuro':
+                response.textContent = 'Neuro-path: Established. Signal: Strong.';
+                break;
+            case 'root':
+                response.textContent = 'Access denied. Administrator privileges required.';
+                break;
+            case 'wifi':
+                response.textContent = 'Scanning frequencies... Signal intercepted.';
+                break;
+            case 'date':
+                response.textContent = new Date().toLocaleString();
+                break;
+            case 'weather':
+                response.textContent = 'Atmospheric pressure: Normal. Temp: 22°C.';
+                break;
+            case 'ping':
+                response.textContent = 'Pong! Latency: 12ms.';
+                break;
+            case 'bio':
+                response.textContent = 'Biometric scan: User identified.';
+                break;
+            case 'map':
+                response.textContent = 'Mapping sector 7-G... Done.';
+                break;
+            case 'logs':
+                response.textContent = 'Last login: 04:20:00 from 127.0.0.1';
+                break;
+            case 'version':
+                response.textContent = 'Terminal OS v.3.0.4 - Build 2026';
+                break;
+            case 'hardware':
+                response.textContent = 'CPU: Quantum Core 128-bit. RAM: 2TB.';
+                break;
+            case 'protocols':
+                response.textContent = 'Active: TCP/IP, SSH, NEURO-LINK, REALITY-SHIELD.';
+                break;
+            case 'security':
+                response.textContent = 'Firewall: Active. Encrypting data...';
+                break;
+            case 'alert':
+                response.style.color = "red";
+                response.textContent = 'WARNING: UNKNOWN ENTITY DETECTED.';
+                break;
+            case 'reboot':
+                response.textContent = 'System reboot initiated... Please wait.';
+                setTimeout(() => location.reload(), 2000);
+                break;
+            case 'exit':
+                response.textContent = 'Closing connection...';
+                input.parentElement.before(response);
+                setTimeout(() => {
+                    window.close();
+                    //browsers block 
+                    window.location.href = "about:blank"; 
+                }, 1000);
+                break;
+            case 'spiderman':
+                response.textContent = 'With great power comes great responsibility.';
+                break;
+            case 'sonic':
+                response.textContent = 'Gotta go fast!';
+                break;
+            case 'invincible':
+                response.textContent = 'I am invincible!';
+                break;
+                case 'saitama':
+                response.textContent = 'One punch is all it takes.';
+                break;
+                case 'mcqueen':
+                response.textContent = 'Ka-chow!';
+                break;
+                case 'onepiece':
+                response.textContent = 'I\'m gonna be King of the Pirates!';
+                break;
+                case 'jujutsu kaisen':
+                response.textContent = 'It’s not the technique, it’s the user.';
+                break;
+                case 'KJ':
+                response.textContent = 'KJ'/'s 21 Series. UNLIMITED FLEX WORKS';
+                break;
+                case 'huggywuggy':
+                response.textContent = 'Huggy Wuggy: I\'m your friend till the end!';
+                break;
+                case 'ninjago':
+                response.textContent = 'Long before time had a name...';
+                break;
+                case 'destroy':
+                response.textContent = 'what have you done...';
+                input.parentElement.before(response);
+                setTimeout(() => {
+                    window.close();
+                    //browsers block 
+                    window.location.href = "about:blank"; 
+                }, 1000);
+                break;
+
+            default:
+                response.textContent = `Unknown command: ${cmd}`;
+        }
+
+        input.parentElement.before(response);
+        input.value = '';
+        terminal.scrollTop = terminal.scrollHeight;
+    }
+});
+
+terminal.addEventListener('click', () => input.focus());
+
+
+        //loading
+        const loader = document.getElementById('loader');
+        const loadLog = document.getElementById('load-log');
+        const messages = ["> NEURAL LINK...", "> BYPASSING FILTERS...", "> LOADING ENGINE...", "> ACCESS GRANTED."];
+        let msgIndex = 0;
+        const interval = setInterval(() => {
+            if (msgIndex < messages.length) {
+                loadLog.innerHTML += messages[msgIndex] + "<br>";
+                msgIndex++;
+            } else {
+                clearInterval(interval);
+                setTimeout(() => { loader.style.opacity = "0"; setTimeout(() => loader.style.display = "none", 1000); }, 300);
+            }
+        }, 200);
+
+        //3d
+        let scene, camera, renderer, core, rings = [], particles;
+        let mouse = { x: 0, y: 0 };
+        let targetMouse = { x: 0, y: 0 };
+        let isMobile = window.innerWidth <= 768;
+
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 8;
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            //mobile
+            renderer.setPixelRatio(isMobile ? Math.min(window.devicePixelRatio, 1.5) : Math.min(window.devicePixelRatio, 2));
+            document.getElementById('canvas-bg').appendChild(renderer.domElement);
+
+            core = new THREE.Group();
+            const geometry = new THREE.IcosahedronGeometry(2, 2);
+            const material = new THREE.MeshStandardMaterial({ color: 0x00f2ff, wireframe: true, emissive: 0x00f2ff, emissiveIntensity: 0.5 });
+            const coreMesh = new THREE.Mesh(geometry, material);
+            core.add(coreMesh);
+
+            for(let i=0; i<4; i++) {
+                const rGeo = new THREE.TorusGeometry(3 + i*0.5, 0.015, 16, 100);
+                const rMat = new THREE.MeshBasicMaterial({ color: 0x00f2ff, transparent: true, opacity: 0.2 });
+                const ring = new THREE.Mesh(rGeo, rMat);
+                ring.rotation.x = Math.random() * Math.PI;
+                rings.push(ring);
+                core.add(ring);
+            }
+            
+            scene.add(core);
+
+            //optmize
+            const particleCount = isMobile ? 800 : 2000;
+            const partGeo = new THREE.BufferGeometry();
+            const posArray = new Float32Array(particleCount * 3);
+            for(let i=0; i < particleCount; i++) { 
+                posArray[i*3] = (Math.random() - 0.5) * 40;       
+                posArray[i*3+1] = (Math.random() - 0.5) * 100;    
+                posArray[i*3+2] = (Math.random() - 0.5) * 40;     
+            }
+            partGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            particles = new THREE.Points(partGeo, new THREE.PointsMaterial({ size: 0.02, color: 0xffffff, transparent: true, opacity: 0.5 }));
+            scene.add(particles);
+
+            const light = new THREE.PointLight(0x00f2ff, 2, 20);
+            light.position.set(5, 5, 5);
+            scene.add(light);
+            scene.add(new THREE.AmbientLight(0xffffff, 0.2));
+
+            //core
+            updateCorePosition();
+
+            //event
+            window.addEventListener('mousemove', onMouseMove, {passive: true});
+            window.addEventListener('touchmove', onTouchMove, {passive: true});
+            window.addEventListener('resize', onWindowResize, false);
+
+            animate();
+        }
+
+        function updateCorePosition() {
+            isMobile = window.innerWidth <= 768;
+            if (isMobile) {
+                
+                gsap.to(core.position, { x: 0, y: 2, z: -2, duration: 1, ease: "power2.out" });
+            } else {
+                //desktop
+                gsap.to(core.position, { x: 3, y: 0, z: 0, duration: 1, ease: "power2.out" });
+            }
+        }
+
+        function onMouseMove(e) {
+            targetMouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+            targetMouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+        }
+
+        function onTouchMove(e) {
+            if(e.touches.length > 0) {
+                targetMouse.x = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+                targetMouse.y = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+            }
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            updateCorePosition();
+        }
+
+        function burst() {
+            gsap.to(core.scale, { x: 1.3, y: 1.3, z: 1.3, duration: 0.1, yoyo: true, repeat: 1 });
+            const term = document.getElementById('term');
+            term.innerHTML += `<br>> CORE PULSE EMITTED... OK`;
+            term.scrollTop = term.scrollHeight;
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            mouse.x += (targetMouse.x - mouse.x) * 0.05;
+            mouse.y += (targetMouse.y - mouse.y) * 0.05;
+
+            //parallax
+            const visibleHeight = 2 * Math.tan((camera.fov * Math.PI / 180) / 2) * camera.position.z;
+            camera.position.y = -(window.scrollY / window.innerHeight) * (visibleHeight * 0.6);
+
+            //spehere
+            core.rotation.y = mouse.x * 0.8; 
+            core.rotation.x = -mouse.y * 0.8;
+
+            rings.forEach((r, i) => {
+                r.rotation.z += 0.01;
+                r.rotation.y += 0.005;
+            });
+
+            //gravity go away
+            core.position.y += Math.sin(Date.now() * 0.001) * 0.005;
+            particles.rotation.y += 0.0002;
+
+            renderer.render(scene, camera);
+        }
+
+        init();
+    </script>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+</html>
